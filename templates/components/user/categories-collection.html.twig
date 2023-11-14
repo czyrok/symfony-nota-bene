@@ -6,21 +6,23 @@
 
         {% if isCurrentUserCategories or categoryNotes | length() > 0 %}
             <li class="w-fit h-full p-2 shadow-lg shadow-emerald-700/50 bg-emerald-500 snap-start">
-                <h3 class="pb-4 text-2xl font-bold">
+                <h3 class="mb-4 text-2xl font-bold">
                     {{ category.getTitle() }}
                 </h3>
 
                 <ul class="w-[20em] gap-y-4 flex flex-col">
                     {% for note in categoryNotes %}
-                        <li>
+                        <li class="last:mb-4">
                             {% include 'components/note/thumbnail.html.twig' with { note: note } %}
                         </li>
                     {% endfor %}
                 </ul>
 
                 {% if isCurrentUserCategories %}
-                    <div class="flex justify-center">
-                        {% include 'components/link.html.twig' with { path: path('app_note_add', { categoryId: category.id }), linkText: 'Add a note' } %}
+                    <div class="flex flex-col items-center">
+                        {% include 'components/link.html.twig' with { path: path('app_note_add', { categoryId: category.getId() }), linkText: 'Add a note' } %}
+                        {% include 'components/link.html.twig' with { path: path('app_category_one_edit', { categoryId: category.getId() }), linkText: 'Edit the category' } %}
+                        {% include 'components/link.html.twig' with { path: path('app_category_one_delete_confirmation', { categoryId: category.getId() }), linkText: 'Delete the category' } %}
                     </div>
                 {% endif %}
             </li>

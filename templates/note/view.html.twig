@@ -25,9 +25,10 @@
                         {% else %}
                             {% include 'components/button.html.twig' with { 'actionPath': path('app_note_one_public', { noteId: note.getId() }), 'buttonText': 'Set public' } %}
                         {% endif %}
-                    {% endif %}
 
-                    {% include 'components/button.html.twig' with { 'actionPath': path('app_profile'), 'buttonText': 'Share' } %}
+                        {% include 'components/button.html.twig' with { 'actionPath': path('app_profile'), 'buttonText': 'Share' } %}
+                        {% include 'components/button.html.twig' with { 'actionPath': path('app_note_one_delete_confirmation', { noteId: note.getId() }), 'buttonText': 'Delete' } %}
+                    {% endif %}
                 </div>
             </div>
 

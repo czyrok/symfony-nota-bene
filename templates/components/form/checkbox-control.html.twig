@@ -1,0 +1,19 @@
+<div>
+    <div class="gap-2 flex items-center">
+        {% if formItemValue is defined %}
+            {{ form_widget(formItem, {'value': formItemValue, 'attr': {'class': 'w-[13em] px-1 text-2xl rounded-xl bg-teal-200 outline-2 focus:outline outline-teal-300'} }) }}
+        {% else %}
+            {{ form_widget(formItem, {'attr': {'class': 'w-9 h-5 outline-none checked:bg-teal-200 bg-white rounded-full shadow-inner before:inline-block before:rounded-full before:bg-teal-300 before:h-4 before:w-4 checked:before:translate-x-full before:ml-0.5 appearance-none'} }) }}
+        {% endif %}
+
+        {% if formItemLabel is defined %}
+            {{ form_label(formItem, formItemLabel, {'label_attr': {'class': 'text-xl block font-light'} }) }}
+        {% endif %}
+    </div>
+
+    <small>{{ form_help(formItem) }}</small>
+
+    <div class="font-black text-red-700">
+        {{ form_errors(formItem) }}
+    </div>
+</div>

@@ -2,18 +2,18 @@
 
 {% block title %}
     {% if note is defined %}
-        Edit a note
+        Note editing page
     {% else %}
-        Add a note
+        Note adding page
     {% endif %}
 {% endblock %}
 
 {% block body %}
     <h2 class="text-4xl text-center font-black">
         {% if note is defined %}
-            Edit a note
+            Note editing page
         {% else %}
-            Add a note
+            Note adding page
         {% endif %}
     </h2>
 
@@ -23,7 +23,11 @@
         </div>
 
         <div class="gap-4 flex flex-col">
-            {% include 'components/form/text-control.html.twig' with { 'formItem': noteCreationForm.content, 'formItemLabel': 'Content' } %}
+            {% include 'components/form/textarea-control.html.twig' with { 'formItem': noteCreationForm.content, 'formItemLabel': 'Content' } %}
+        </div>
+
+        <div class="gap-4 flex flex-col">
+            {% include 'components/form/checkbox-control.html.twig' with { 'formItem': noteCreationForm.isPublic, 'formItemLabel': 'Set public' } %}
         </div>
         
         <div class="gap-4 flex items-center">

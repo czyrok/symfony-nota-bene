@@ -1,0 +1,13 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Category deleting confirmation page{% endblock %}
+
+{% block body %}
+    <h2 class="text-4xl text-center font-black">Category deleting confirmation page</h2>
+
+    <div class="px-3 md:px-14 py-20 gap-10 flex flex-col items-center">
+        {% include 'components/message/inform.html.twig' with { message: 'Are you sure, you want to delete the category "' ~ category.getTitle() ~ '" ? The notes included in the category will be detroyed !' } %}
+
+        {% include 'components/button.html.twig' with { actionPath: path('app_category_one_delete', { categoryId: category.getId() }), buttonText: 'Delete the category', highlight: true } %}
+    </div>
+{% endblock %}

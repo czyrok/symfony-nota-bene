@@ -1,0 +1,13 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Note deleting confirmation page{% endblock %}
+
+{% block body %}
+    <h2 class="text-4xl text-center font-black">Note deleting confirmation page</h2>
+
+    <div class="px-3 md:px-14 py-20 gap-10 flex flex-col items-center">
+        {% include 'components/message/inform.html.twig' with { message: 'Are you sure, you want to delete the note "' ~ note.getTitle() ~ '" ?' } %}
+
+        {% include 'components/button.html.twig' with { actionPath: path('app_note_one_delete', { noteId: note.getId() }), buttonText: 'Delete the note', highlight: true } %}
+    </div>
+{% endblock %}

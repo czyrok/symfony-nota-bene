@@ -2,11 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
 use App\Entity\User;
 use App\Type\RegisterType;
 use App\Service\UserService;
-use App\Type\CategoryCreationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

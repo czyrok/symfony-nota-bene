@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Note;
 use App\Service\NoteService;
+use App\Type\ConfirmationType;
 use App\Type\NoteCreationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -70,11 +71,11 @@ class NoteController extends AbstractController
         }
 
         if (!$note->isPublic() && $currentUser && $note->getAuthor()->getId() !== $currentUser->getId()) {
-            throw new NotFoundHttpException("Note not found");
+            throw new AccessDeniedHttpException("You can't view a private note of a different user");
         }
 
         if (!$note->isPublic() && !$currentUser) {
-            throw new NotFoundHttpException("Note not found");
+            throw new AccessDeniedHttpException("You can't view a private note of a different user");
         }
 
         return $this->render('note/view.html.twig', [
@@ -135,6 +136,40 @@ class NoteController extends AbstractController
 
         return $this->render('note/edit-form.html.twig', [
             'noteCreationForm' => $noteCreationForm,
+            'note' => $note
+        ]);
+    }
+
+    #[Route(path: '/note/{noteId}/delete', name: 'app_note_one_delete')]
+    public function deleteNote(int $noteId, NoteService $noteService): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $currentUser = $this->getUser();
+
+        $noteService->deleteNote($noteId, $currentUser);
+
+        return $this->redirectToRoute('app_profile');
+    }
+
+    #[Route(path: '/note/{noteId}/delete/confirmation', name: 'app_note_one_delete_confirmation')]
+    public function deleteNoteConfirmation(int $noteId, NoteService $noteService): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $currentUser = $this->getUser();
+
+        $note = $noteService->getNote($noteId);
+
+        if (!$note) {
+            throw new NotFoundHttpException("Note not found");
+        }
+
+        if ($note->getAuthor()->getId() !== $currentUser->getId()) {
+            throw new AccessDeniedHttpException("You can't delete a note of a different user");
+        }
+
+        return $this->render('note/delete-confirmation.html.twig', [
             'note' => $note
         ]);
     }

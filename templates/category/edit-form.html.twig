@@ -1,9 +1,21 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %}Add a category{% endblock %}
+{% block title %}
+    {% if note is defined %}
+        Category editing page
+    {% else %}
+        Category adding page
+    {% endif %}
+{% endblock %}
 
 {% block body %}
-    <h2 class="text-4xl text-center font-black">Add a category</h2>
+    <h2 class="text-4xl text-center font-black">
+        {% if note is defined %}
+            Category editing page
+        {% else %}
+            Category adding page
+        {% endif %}
+    </h2>
 
     {{ form_start(categoryCreationForm, {'attr': {'class': 'py-20 gap-10 flex flex-col items-center'} }) }}
         <div class="gap-4 flex flex-col">
@@ -11,7 +23,11 @@
         </div>
         
         <div class="gap-4 flex items-center">
-            {% include 'components/form/submit.html.twig' with { 'formItem': categoryCreationForm.submit, 'formItemLabel': 'Add the category' } %}
+            {% if category is defined %}
+                {% include 'components/form/submit.html.twig' with { 'formItem': categoryCreationForm.submit, 'formItemLabel': 'Edit the category' } %}
+            {% else %}
+                {% include 'components/form/submit.html.twig' with { 'formItem': categoryCreationForm.submit, 'formItemLabel': 'Add the category' } %}
+            {% endif %}
         </div>
     {{ form_end(categoryCreationForm) }}
 {% endblock %}

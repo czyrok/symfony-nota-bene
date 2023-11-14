@@ -37,7 +37,6 @@ class NoteService
 
     public function addNoteToUser(Note $note, int $categoryId, User $currentUser): void {
         $note->setAuthor($currentUser);
-        $note->setIsPublic(false);
 
         $noteCategory = null;
 
@@ -57,7 +56,7 @@ class NoteService
     }
 
     public function likeNote(int $noteId, User $currentUser): void {
-        $note = $this->noteRepository->findOneBy(array('id' => $noteId));
+        $note = $this->getNote($noteId);
 
         if (!$note) {
             throw new NotFoundHttpException("Note not found");
@@ -78,14 +77,14 @@ class NoteService
         $this->saveNote($note);
     }
 
-    public function toggleIsPublicField(int $noteId, ?User $currentUser = null): void {
-        $note = $this->noteRepository->findOneBy(array('id' => $noteId));
+    public function toggleIsPublicField(int $noteId, User $currentUser): void {
+        $note = $this->getNote($noteId);
 
         if (!$note) {
             throw new NotFoundHttpException("Note not found");
         }
 
-        if ($currentUser && $currentUser->getId() !== $note->getAuthor()->getId()) {
+        if ($currentUser->getId() !== $note->getAuthor()->getId()) {
             throw new AccessDeniedHttpException("You can't edit a note of a different user");
         }
 
@@ -96,6 +95,21 @@ class NoteService
         }
         
         $this->saveNote($note);
+    }
+
+    public function deleteNote(int $noteId, User $currentUser = null): void {
+        $note = $this->getNote($noteId);
+
+        if (!$note) {
+            throw new NotFoundHttpException("Note not found");
+        }
+
+        if ($currentUser->getId() !== $note->getAuthor()->getId()) {
+            throw new AccessDeniedHttpException("You can't delete a note of a different user");
+        }
+
+        $this->entityManager->remove($note);
+        $this->entityManager->flush();
     }
 
     public function hasLikedNote(Note $note, User $currentUser): bool {
