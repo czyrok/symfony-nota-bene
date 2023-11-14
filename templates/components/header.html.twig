@@ -1,0 +1,42 @@
+<header class="pt-3 px-4 gap-10 grid grid-cols-[auto_1fr] bg-teal-900">
+    <h1 class="text-2xl font-light text-teal-100">
+        <span class="hidden sm:inline">
+            <span class="font-medium underline decoration-8">N</span>ota
+            <span class="font-medium underline decoration-8">B</span>ene
+        </span>
+
+        <span class="sm:hidden font-medium underline decoration-8">
+            NB
+        </span>
+    </h1>
+ 
+    <nav class="gap-4 flex justify-between">
+        {% set route = app.request.get('_route') %}
+
+        <ul class="gap-4 flex justify-center text-xl text-white">
+            <li>
+                {% include 'components/link/nav-link.html.twig' with { 'path': path('app_explore'), 'linkText': 'Explore', 'isActive': 'explore' in route ? true } %}
+            </li>
+            
+            <li>
+                {% include 'components/link/nav-link.html.twig' with { 'path': path('app_explore'), 'linkText': 'Search', 'isActive': 'search' in route ? true } %}
+            </li>
+        </ul>
+
+        <ul class="gap-4 hidden sm:flex justify-center text-xl text-white">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li>
+                    {% include 'components/link/nav-link.html.twig' with { 'path': path('app_profile'), 'linkText': 'Your profile' , 'isActive': 'profile' in route ? true } %}
+                </li>
+
+                <li>
+                    {% include 'components/link/nav-link.html.twig' with { 'path': path('app_logout'), 'linkText': 'Log out' } %}
+                </li>
+            {% else %}
+                 <li>
+                    {% include 'components/link/nav-link.html.twig' with { 'path': path('app_login'), 'linkText': 'Log in', 'isActive': 'login' in route or 'register' in route ? true } %}
+                </li>
+            {% endif %}           
+        </ul>
+    </nav>
+</header>

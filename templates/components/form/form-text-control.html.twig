@@ -1,0 +1,21 @@
+<div>
+    {% if formItemLabel is defined %}
+        {{ form_label(formItem, formItemLabel, {'label_attr': {'class': 'text-xl block font-light'} }) }}
+    {% endif %}
+
+    {% if formItemName is defined and formItemValue is defined %}
+        {{ form_widget(formItem, {'full_name': formItemName, 'value': formItemValue, 'attr': {'class': 'w-[13em] px-1 text-2xl rounded-xl bg-teal-200 outline-2 focus:outline outline-teal-300'} }) }}
+    {% elseif formItemName is defined %}
+        {{ form_widget(formItem, {'full_name': formItemName, 'attr': {'class': 'w-[13em] px-1 text-2xl rounded-xl bg-teal-200 outline-2 focus:outline outline-teal-300'} }) }}
+    {% elseif formItemValue is defined %}
+        {{ form_widget(formItem, {'value': formItemValue, 'attr': {'class': 'w-[13em] px-1 text-2xl rounded-xl bg-teal-200 outline-2 focus:outline outline-teal-300'} }) }}
+    {% else %}
+        {{ form_widget(formItem, {'attr': {'class': 'w-[13em] px-1 text-2xl rounded-xl bg-teal-200 outline-2 focus:outline outline-teal-300'} }) }}
+    {% endif %}
+
+    <small>{{ form_help(formItem) }}</small>
+
+    <div class="font-black text-red-700">
+        {{ form_errors(formItem) }}
+    </div>
+</div>

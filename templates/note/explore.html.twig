@@ -1,0 +1,15 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Explore{% endblock %}
+
+{% block body %}
+    <h2 class="text-4xl text-center font-black">Explore</h2>
+
+    <div class="px-3 md:px-14 py-20 mx-auto gap-3 flex flex-wrap justify-evenly">
+        {% include 'components/note/note-thumbnail.html.twig' with { } %}
+        {% include 'components/note/note-thumbnail.html.twig' with { } %}
+        {% include 'components/note/note-thumbnail.html.twig' with { } %}
+        {% include 'components/note/note-thumbnail.html.twig' with { } %}
+        {% include 'components/note/note-thumbnail.html.twig' with { } %}
+    </div>
+{% endblock %}

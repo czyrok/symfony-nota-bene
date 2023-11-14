@@ -1,0 +1,5 @@
+{% if isActive is defined and isActive is same as(true) %}
+    <a class="text-teal-300 hover:underline decoration-2" href="{{ path }}">{{ linkText }}</a>
+{% else %}
+    <a class="hover:underline decoration-2" href="{{ path }}">{{ linkText }}</a>
+{% endif %}

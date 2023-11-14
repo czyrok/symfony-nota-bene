@@ -1,0 +1,15 @@
+<div class="w-[20em] h-[9em] px-6 py-2 grid grid-rows-[auto_auto_auto_1fr] rounded-2xl bg-emerald-200 transition-all group">
+    <p class="text-3xl block font-light truncate hover:scale-y-[1.15] transform transition-transform">
+        Title
+    </p>
+
+    <p class="w-fit font-medium hover:scale-y-[1.15] transform transition-transform">
+        800 likes
+    </p>
+
+    {% include 'components/tag/tags-list.html.twig' with { } %}
+
+    <div class="opacity-0 group-hover:opacity-100 flex justify-end items-end transition-all">
+        {% include 'components/link/nav-link.html.twig' with { 'path': path('app_register'), 'linkText': 'View' } %}
+    </div>
+</div>

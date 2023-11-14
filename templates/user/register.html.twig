@@ -1,0 +1,20 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block body %}
+    <h2 class="text-4xl text-center font-black">Sign up</h2>
+
+    {{ form_start(form, {'attr': {'class': 'py-20 gap-10 flex flex-col items-center'} }) }}
+        <div class="gap-4 flex flex-col">
+            {% include 'components/form/form-text-control.html.twig' with { 'formItem': form.username, 'formItemLabel': 'Username' } %}
+            {% include 'components/form/form-text-control.html.twig' with { 'formItem': form.password, 'formItemLabel': 'Password' } %}
+        </div>
+        
+        <div class="gap-4 flex items-center">
+            {% include 'components/form/form-submit.html.twig' with { 'formSubmitItem': form.submit } %}
+
+            {% include 'components/link/nav-link.html.twig' with { 'path': path('app_login'), 'linkText': 'Log in' } %}
+        </div>
+    {{ form_end(form) }}
+{% endblock %}
