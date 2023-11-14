@@ -33,9 +33,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Category::class, orphanRemoval: true)]
     private Collection $categories;
 
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Note::class, orphanRemoval: true)]
+    private Collection $notes;
+
+    #[ORM\ManyToMany(targetEntity: Note::class, inversedBy: 'usersLike')]
+    private Collection $likedNotes;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->notes = new ArrayCollection();
+        $this->likedNotes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -134,6 +142,60 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $category->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Note>
+     */
+    public function getNotes(): Collection
+    {
+        return $this->notes;
+    }
+
+    public function addNote(Note $note): static
+    {
+        if (!$this->notes->contains($note)) {
+            $this->notes->add($note);
+            $note->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Note $note): static
+    {
+        if ($this->notes->removeElement($note)) {
+            // set the owning side to null (unless already changed)
+            if ($note->getAuthor() === $this) {
+                $note->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Note>
+     */
+    public function getLikedNotes(): Collection
+    {
+        return $this->likedNotes;
+    }
+
+    public function addLikedNote(Note $likedNote): static
+    {
+        if (!$this->likedNotes->contains($likedNote)) {
+            $this->likedNotes->add($likedNote);
+        }
+
+        return $this;
+    }
+
+    public function removeLikedNote(Note $likedNote): static
+    {
+        $this->likedNotes->removeElement($likedNote);
 
         return $this;
     }
