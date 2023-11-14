@@ -15,26 +15,26 @@
 
         <ul class="gap-4 flex justify-center text-xl text-white">
             <li>
-                {% include 'components/link/nav-link.html.twig' with { 'path': path('app_explore'), 'linkText': 'Explore', 'isActive': 'explore' in route ? true } %}
+                {% include 'components/link.html.twig' with { 'path': path('app_explore'), 'linkText': 'Explore', 'isActive': 'explore' in route ? true } %}
             </li>
             
             <li>
-                {% include 'components/link/nav-link.html.twig' with { 'path': path('app_explore'), 'linkText': 'Search', 'isActive': 'search' in route ? true } %}
+                {% include 'components/link.html.twig' with { 'path': path('app_search'), 'linkText': 'Search', 'isActive': 'search' in route ? true } %}
             </li>
         </ul>
 
-        <ul class="gap-4 hidden sm:flex justify-center text-xl text-white">
+        <ul class="gap-4 flex justify-center text-xl text-white">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <li>
-                    {% include 'components/link/nav-link.html.twig' with { 'path': path('app_profile'), 'linkText': 'Your profile' , 'isActive': 'profile' in route ? true } %}
+                    {% include 'components/link.html.twig' with { 'path': path('app_profile'), 'linkText': 'Your profile' , 'isActive': 'profile' in route ? true } %}
                 </li>
 
-                <li>
-                    {% include 'components/link/nav-link.html.twig' with { 'path': path('app_logout'), 'linkText': 'Log out' } %}
+                <li class="hidden sm:block">
+                    {% include 'components/link.html.twig' with { 'path': path('app_logout'), 'linkText': 'Log out' } %}
                 </li>
             {% else %}
-                 <li>
-                    {% include 'components/link/nav-link.html.twig' with { 'path': path('app_login'), 'linkText': 'Log in', 'isActive': 'login' in route or 'register' in route ? true } %}
+                <li class="hidden sm:block">
+                    {% include 'components/link.html.twig' with { 'path': path('app_login'), 'linkText': 'Log in', 'isActive': 'login' in route or 'register' in route ? true } %}
                 </li>
             {% endif %}           
         </ul>

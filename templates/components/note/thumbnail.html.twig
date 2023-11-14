@@ -1,0 +1,9 @@
+<div class="w-[20em] h-[9em] px-6 py-2 grid grid-rows-[auto_auto_auto_1fr] rounded-2xl hover:scale-[1.10] hover:shadow-lg hover:shadow-emerald-700/50 bg-emerald-200 transition-all group">
+    {% include 'components/note/title/text.html.twig' with { } %}
+    {% include 'components/note/likes/text.html.twig' with { } %}
+    {% include 'components/note/tag/list.html.twig' with { } %}
+
+    <div class="opacity-0 group-hover:opacity-100 flex justify-end items-end transition-all">
+        {% include 'components/link.html.twig' with { 'path': path('app_register'), 'linkText': 'View' } %}
+    </div>
+</div>

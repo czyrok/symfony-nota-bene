@@ -1,0 +1,38 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Note{% endblock %}
+
+{% block body %}
+    <h2 class="text-4xl text-center font-black">Note</h2>
+
+    <div class="px-3 md:px-14 py-20 gap-6 flex flex-col">
+        <div>
+            <div class="gap-4 flex items-center">
+                {% include 'components/note/title/text.html.twig' with { isInCollection: true } %}
+                
+                <div class="gap-2 flex">
+                    {% include 'components/button.html.twig' with { 'actionPath': path('app_profile'), 'buttonText': 'Like' } %}
+                    {% include 'components/button.html.twig' with { 'actionPath': path('app_profile'), 'buttonText': 'Share' } %}
+                </div>
+            </div>
+
+            {% include 'components/note/likes/text.html.twig' with { isInCollection: true } %}
+            {% include 'components/note/tag/list.html.twig' with { isInCollection: true } %}
+            {% include 'components/note/category/text.html.twig' with { isInCollection: true } %}
+        </div>
+
+        <div class="gap-4 flex items-center">
+            {% include 'components/note/author/text.html.twig' %}
+
+            {% include 'components/button.html.twig' with { 'actionPath': path('app_profile'), 'buttonText': 'Profile' } %}
+        </div>
+
+        <p class="text-justify">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae quidem eos vel totam, dolores odit voluptates recusandae. Quisquam, aut autem. Voluptatem suscipit corporis ab fugit, maiores eius delectus temporibus molestias commodi veritatis vero repellat alias sit voluptatum deserunt, minima repudiandae ut exercitationem odio veniam reiciendis rem ea consequatur. Itaque velit nobis, vero perspiciatis natus quasi repudiandae repellat ipsam ab consectetur eos, dolor laborum architecto. Ex numquam repellendus odit laboriosam cumque veritatis, asperiores sapiente totam vel dolor voluptatem cum quidem debitis eos labore molestiae accusantium vero eum sequi suscipit dolorem eveniet aperiam minima! Nihil excepturi quis architecto nobis possimus et qui. Dolorem tempora perferendis minima, quisquam cupiditate ipsum sunt? Quos excepturi quidem quaerat inventore omnis quasi eos fugit necessitatibus unde illum iure molestiae ad, totam voluptatum accusamus culpa temporibus! Nulla molestias quis labore placeat eum. Quisquam nulla sequi vitae quae ipsa nesciunt hic mollitia et rem, deserunt ullam suscipit eum qui a omnis dolorem voluptatem tempore voluptatibus iste nam veritatis fuga nostrum? Error voluptatibus rerum laborum expedita obcaecati! Modi magni distinctio, tempore ratione, explicabo blanditiis eum ullam culpa, at illo adipisci veniam incidunt aperiam! Inventore, ipsa? Laborum odit ut voluptatibus accusantium sint ratione nostrum cupiditate. Eius qui earum laboriosam ducimus tempora animi expedita libero explicabo consequuntur! Autem cupiditate incidunt dignissimos qui laborum ratione placeat repudiandae, repellat ex? Magni numquam illo repellat possimus quisquam iure eum eaque aut sapiente, qui hic blanditiis a alias? Quae, rerum. Praesentium, rerum reprehenderit. Pariatur, beatae nulla delectus, aspernatur recusandae sint aut aliquam enim officia earum officiis, vero magnam culpa excepturi quis quo.
+        </p>
+
+        <div class="flex justify-center">
+            {% include 'components/button.html.twig' with { actionPath: path('app_profile'), buttonText: 'Edit', highlight: true } %}
+        </div>
+    </div>
+{% endblock %}
