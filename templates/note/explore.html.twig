@@ -5,5 +5,5 @@
 {% block body %}
     <h2 class="text-4xl text-center font-black">Explore</h2>
 
-    {% include 'components/note/collection.html.twig' with { } %}
+    {% include 'components/note/collection.html.twig' with { notes: notes } %}
 {% endblock %}

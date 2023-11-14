@@ -1,5 +1,0 @@
-{% if formItemLabel is defined %}
-    {{ form_row(formSubmitItem, { 'label': formItemLabel, 'attr': {'class': 'px-5 text-2xl rounded-md text-white bg-teal-900 hover:bg-teal-400 outline-4 focus:outline outline-teal-300 transition-colors'} }) }}
-{% else %}
-    {{ form_row(formSubmitItem, { 'label': 'Submit', 'attr': {'class': 'px-5 text-2xl rounded-md text-white bg-teal-900 hover:bg-teal-400 outline-4 focus:outline outline-teal-300 transition-colors'} }) }}
-{% endif %}

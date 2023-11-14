@@ -1,7 +1,5 @@
 <div class="px-3 md:px-14 py-20 gap-3 flex flex-wrap justify-evenly">
-    {% include 'components/note/thumbnail.html.twig' with { } %}
-    {% include 'components/note/thumbnail.html.twig' with { } %}
-    {% include 'components/note/thumbnail.html.twig' with { } %}
-    {% include 'components/note/thumbnail.html.twig' with { } %}
-    {% include 'components/note/thumbnail.html.twig' with { } %}
+    {% for note in notes %}
+        {% include 'components/note/thumbnail.html.twig' with { note: note } %}
+    {% endfor %}
 </div>

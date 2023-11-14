@@ -30,7 +30,7 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('app_profile');
         }
 
-        return $this->render('category/add-form.html.twig', [
+        return $this->render('category/edit-form.html.twig', [
             'categoryCreationForm' => $categoryCreationForm
         ]);
     }

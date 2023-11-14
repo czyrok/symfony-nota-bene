@@ -7,12 +7,12 @@
 
     {{ form_start(registerForm, {'attr': {'class': 'py-20 gap-10 flex flex-col items-center'} }) }}
         <div class="gap-4 flex flex-col">
-            {% include 'components/form/form-text-control.html.twig' with { 'formItem': registerForm.username, 'formItemLabel': 'Username' } %}
-            {% include 'components/form/form-text-control.html.twig' with { 'formItem': registerForm.password, 'formItemLabel': 'Password' } %}
+            {% include 'components/form/text-control.html.twig' with { 'formItem': registerForm.username, 'formItemLabel': 'Username' } %}
+            {% include 'components/form/text-control.html.twig' with { 'formItem': registerForm.password, 'formItemLabel': 'Password' } %}
         </div>
         
         <div class="gap-4 flex items-center">
-            {% include 'components/form/form-submit.html.twig' with { 'formSubmitItem': registerForm.submit } %}
+            {% include 'components/form/submit.html.twig' with { 'formItem': registerForm.submit } %}
 
             {% include 'components/link.html.twig' with { 'path': path('app_login'), 'linkText': 'Log in' } %}
         </div>

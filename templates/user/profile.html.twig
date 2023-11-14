@@ -6,6 +6,6 @@
     <div class="h-full grid grid-rows-[auto_1fr]">
         <h2 class="text-4xl text-center font-black">Profile ({{ user.username }})</h2>
 
-        {% include 'components/category/list.html.twig' with { categories: user.getCategories() } %}
+        {% include 'components/user/categories-collection.html.twig' with { categories: user.getCategories() } %}
     </div>
 {% endblock %}

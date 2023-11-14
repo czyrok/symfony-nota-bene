@@ -10,6 +10,7 @@ use App\Type\CategoryCreationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -66,9 +67,13 @@ class UserController extends AbstractController
     }
 
     #[Route(path: '/profile/{userId}', name: 'app_profile_one')]
-    public function specificProfile(int $userId): Response
+    public function specificProfile(int $userId, UserService $userService): Response
     {
-        $user = null;
+        $user = $userService->getUser($userId);
+
+        if (!$user) {
+            throw new NotFoundHttpException("User not found");
+        }
 
         return $this->render('user/profile.html.twig', [
             'user' => $user

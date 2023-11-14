@@ -26,7 +26,7 @@
         <ul class="gap-4 flex justify-center text-xl text-white">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <li>
-                    {% include 'components/link.html.twig' with { 'path': path('app_profile'), 'linkText': 'Your profile' , 'isActive': 'profile' in route ? true } %}
+                    {% include 'components/link.html.twig' with { 'path': path('app_profile'), 'linkText': 'Your profile' } %}
                 </li>
 
                 <li class="hidden sm:block">

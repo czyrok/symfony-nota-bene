@@ -35,6 +35,9 @@ class Note
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'likedNotes')]
     private Collection $usersLike;
 
+    #[ORM\Column]
+    private ?bool $isPublic = null;
+
     public function __construct()
     {
         $this->usersLike = new ArrayCollection();
@@ -128,6 +131,18 @@ class Note
         if ($this->usersLike->removeElement($usersLike)) {
             $usersLike->removeLikedNote($this);
         }
+
+        return $this;
+    }
+
+    public function isPublic(): ?bool
+    {
+        return $this->isPublic;
+    }
+
+    public function setIsPublic(bool $isPublic): static
+    {
+        $this->isPublic = $isPublic;
 
         return $this;
     }

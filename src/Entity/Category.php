@@ -59,6 +59,13 @@ class Category
         return $this;
     }
 
+    public function getPublicNotes(): Collection
+    {
+        return $this->getNotes()->filter(function (Note $note) {
+            return $note->isPublic();
+        });
+    }
+
     /**
      * @return Collection<int, Note>
      */

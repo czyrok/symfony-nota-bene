@@ -7,11 +7,11 @@
 
     {{ form_start(categoryCreationForm, {'attr': {'class': 'py-20 gap-10 flex flex-col items-center'} }) }}
         <div class="gap-4 flex flex-col">
-            {% include 'components/form/form-text-control.html.twig' with { 'formItem': categoryCreationForm.title, 'formItemLabel': 'Title' } %}
+            {% include 'components/form/text-control.html.twig' with { 'formItem': categoryCreationForm.title, 'formItemLabel': 'Title' } %}
         </div>
         
         <div class="gap-4 flex items-center">
-            {% include 'components/form/form-submit.html.twig' with { 'formSubmitItem': categoryCreationForm.submit } %}
+            {% include 'components/form/submit.html.twig' with { 'formItem': categoryCreationForm.submit, 'formItemLabel': 'Add the category' } %}
         </div>
     {{ form_end(categoryCreationForm) }}
 {% endblock %}

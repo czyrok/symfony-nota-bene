@@ -2,6 +2,8 @@
 
 {% block title %}Note{% endblock %}
 
+{% set isCurrentUserNote = app.user.getId() is same as(note.getAuthor().getId()) %}
+
 {% block body %}
     <h2 class="text-4xl text-center font-black">Note</h2>
 
@@ -11,12 +13,28 @@
                 {% include 'components/note/text/title.html.twig' with { note: note, isInCollection: true } %}
                 
                 <div class="gap-2 flex">
-                    {% include 'components/button.html.twig' with { 'actionPath': path('app_profile'), 'buttonText': 'Like' } %}
+                    {% if note.isPublic() and currentUserHasLikedNote is defined and currentUserHasLikedNote %}
+                        {% include 'components/button.html.twig' with { 'actionPath': path('app_note_one_like', { noteId: note.getId() }), 'buttonText': 'Unlike' } %}
+                    {% elseif note.isPublic() and currentUserHasLikedNote is defined and not currentUserHasLikedNote %}
+                        {% include 'components/button.html.twig' with { 'actionPath': path('app_note_one_like', { noteId: note.getId() }), 'buttonText': 'Like' } %}
+                    {% endif %}
+
+                    {% if isCurrentUserNote %}
+                        {% if note.isPublic() %}
+                            {% include 'components/button.html.twig' with { 'actionPath': path('app_note_one_public', { noteId: note.getId() }), 'buttonText': 'Unset public' } %}
+                        {% else %}
+                            {% include 'components/button.html.twig' with { 'actionPath': path('app_note_one_public', { noteId: note.getId() }), 'buttonText': 'Set public' } %}
+                        {% endif %}
+                    {% endif %}
+
                     {% include 'components/button.html.twig' with { 'actionPath': path('app_profile'), 'buttonText': 'Share' } %}
                 </div>
             </div>
 
-            {% include 'components/note/text/likes-count.html.twig' with { likesCount: note.getUsersLike() | length(), isInCollection: true } %}
+            {% if note.isPublic() %}
+                {% include 'components/note/text/likes-count.html.twig' with { likesCount: note.getUsersLike() | length(), isInCollection: true } %}
+            {% endif %}
+
             {% include 'components/note/tag/list.html.twig' with { isInCollection: true } %}
             {% include 'components/note/text/category.html.twig' with { category: note.getCategory(), isInCollection: true } %}
         </div>
@@ -24,15 +42,17 @@
         <div class="gap-4 flex items-center">
             {% include 'components/note/text/author.html.twig' with { author: note.getAuthor() } %}
 
-            {% include 'components/button.html.twig' with { 'actionPath': path('app_profile'), 'buttonText': 'Profile' } %}
+            {% include 'components/button.html.twig' with { 'actionPath': path('app_profile_one', { userId: note.getAuthor().getId() }), 'buttonText': 'Profile' } %}
         </div>
 
         <p class="text-justify">
             {{ note.getContent() }}
         </p>
 
-        <div class="flex justify-center">
-            {% include 'components/button.html.twig' with { actionPath: path('app_profile'), buttonText: 'Edit', highlight: true } %}
-        </div>
+        {% if isCurrentUserNote %}
+            <div class="flex justify-center">
+                {% include 'components/button.html.twig' with { actionPath: path('app_note_one_edit', { noteId: note.getId() }), buttonText: 'Edit the note', highlight: true } %}
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
