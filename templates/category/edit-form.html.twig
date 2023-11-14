@@ -17,17 +17,17 @@
         {% endif %}
     </h2>
 
-    {{ form_start(categoryCreationForm, {'attr': {'class': 'py-20 gap-10 flex flex-col items-center'} }) }}
+    {{ form_start(categoryEditForm, {'attr': {'class': 'py-20 gap-10 flex flex-col items-center'} }) }}
         <div class="gap-4 flex flex-col">
-            {% include 'components/form/text-control.html.twig' with { 'formItem': categoryCreationForm.title, 'formItemLabel': 'Title' } %}
+            {% include 'components/form/text-control.html.twig' with { 'formItem': categoryEditForm.title, 'formItemLabel': 'Title' } %}
         </div>
         
         <div class="gap-4 flex items-center">
             {% if category is defined %}
-                {% include 'components/form/submit.html.twig' with { 'formItem': categoryCreationForm.submit, 'formItemLabel': 'Edit the category' } %}
+                {% include 'components/form/submit.html.twig' with { 'formItem': categoryEditForm.submit, 'formItemLabel': 'Edit the category' } %}
             {% else %}
-                {% include 'components/form/submit.html.twig' with { 'formItem': categoryCreationForm.submit, 'formItemLabel': 'Add the category' } %}
+                {% include 'components/form/submit.html.twig' with { 'formItem': categoryEditForm.submit, 'formItemLabel': 'Add the category' } %}
             {% endif %}
         </div>
-    {{ form_end(categoryCreationForm) }}
+    {{ form_end(categoryEditForm) }}
 {% endblock %}

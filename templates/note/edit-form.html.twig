@@ -17,25 +17,29 @@
         {% endif %}
     </h2>
 
-    {{ form_start(noteCreationForm, {'attr': {'class': 'py-20 gap-10 flex flex-col items-center'} }) }}
+    {{ form_start(noteEditForm, {'attr': {'class': 'py-20 gap-10 flex flex-col items-center'} }) }}
         <div class="gap-4 flex flex-col">
-            {% include 'components/form/text-control.html.twig' with { 'formItem': noteCreationForm.title, 'formItemLabel': 'Title' } %}
+            {% include 'components/form/text-control.html.twig' with { 'formItem': noteEditForm.title, 'formItemLabel': 'Title' } %}
         </div>
 
         <div class="gap-4 flex flex-col">
-            {% include 'components/form/textarea-control.html.twig' with { 'formItem': noteCreationForm.content, 'formItemLabel': 'Content' } %}
+            {% include 'components/form/textarea-control.html.twig' with { 'formItem': noteEditForm.content, 'formItemLabel': 'Content' } %}
         </div>
 
         <div class="gap-4 flex flex-col">
-            {% include 'components/form/checkbox-control.html.twig' with { 'formItem': noteCreationForm.isPublic, 'formItemLabel': 'Set public' } %}
+            {% include 'components/form/choices-control.html.twig' with { 'formItem': noteEditForm.tags, 'formItemLabel': 'Tags' } %}
+        </div>
+
+        <div class="gap-4 flex flex-col">
+            {% include 'components/form/checkbox-control.html.twig' with { 'formItem': noteEditForm.isPublic, 'formItemLabel': 'Set public' } %}
         </div>
         
         <div class="gap-4 flex items-center">
             {% if note is defined %}
-                {% include 'components/form/submit.html.twig' with { 'formItem': noteCreationForm.submit, 'formItemLabel': 'Edit the note' } %}
+                {% include 'components/form/submit.html.twig' with { 'formItem': noteEditForm.submit, 'formItemLabel': 'Edit the note' } %}
             {% else %}
-                {% include 'components/form/submit.html.twig' with { 'formItem': noteCreationForm.submit, 'formItemLabel': 'Add the note' } %}
+                {% include 'components/form/submit.html.twig' with { 'formItem': noteEditForm.submit, 'formItemLabel': 'Add the note' } %}
             {% endif %}
         </div>
-    {{ form_end(noteCreationForm) }}
+    {{ form_end(noteEditForm) }}
 {% endblock %}

@@ -23,17 +23,17 @@ class CategoryController extends AbstractController
 
         $category = new Category();
 
-        $categoryCreationForm = $this->createForm(CategoryEditType::class, $category);
-        $categoryCreationForm->handleRequest($request);
+        $categoryEditForm = $this->createForm(CategoryEditType::class, $category);
+        $categoryEditForm->handleRequest($request);
 
-        if ($categoryCreationForm->isSubmitted() && $categoryCreationForm->isValid()) {
+        if ($categoryEditForm->isSubmitted() && $categoryEditForm->isValid()) {
             $categoryService->addCategoryToUser($category, $currentUser);
 
             return $this->redirectToRoute('app_profile');
         }
 
         return $this->render('category/edit-form.html.twig', [
-            'categoryCreationForm' => $categoryCreationForm
+            'categoryEditForm' => $categoryEditForm
         ]);
     }
 
@@ -54,17 +54,17 @@ class CategoryController extends AbstractController
             throw new AccessDeniedHttpException("You can't edit a category of a different user");
         }
 
-        $categoryCreationForm = $this->createForm(CategoryEditType::class, $category);
-        $categoryCreationForm->handleRequest($request);
+        $categoryEditForm = $this->createForm(CategoryEditType::class, $category);
+        $categoryEditForm->handleRequest($request);
 
-        if ($categoryCreationForm->isSubmitted() && $categoryCreationForm->isValid()) {
+        if ($categoryEditForm->isSubmitted() && $categoryEditForm->isValid()) {
             $categoryService->saveCategory($category);
 
             return $this->redirectToRoute('app_profile');
         }
 
         return $this->render('category/edit-form.html.twig', [
-            'categoryCreationForm' => $categoryCreationForm,
+            'categoryEditForm' => $categoryEditForm,
             'category' => $category
         ]);
     }

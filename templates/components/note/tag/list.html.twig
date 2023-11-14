@@ -1,35 +1,15 @@
 <ul class="gap-x-3 flex flex-wrap text-teal-900 font-medium">
     {% if isInCollection is defined and isInCollection %}
-        <li class="hover:scale-y-[1.15] transform transition-transform">
-            Test TODO
-        </li>
-        <li class="hover:scale-y-[1.15] transform transition-transform">
-            Test TODO
-        </li>
-        <li class="hover:scale-y-[1.15] transform transition-transform">
-            Test TODO
-        </li>
-        <li class="hover:scale-y-[1.15] transform transition-transform">
-            Test TODO
-        </li>
-        <li class="hover:scale-y-[1.15] transform transition-transform">
-            Test TODO
-        </li>
+        {% for tag in tags %}
+            <li class="hover:scale-y-[1.15] transform transition-transform">
+                {{ tag.name }}
+            </li>
+        {% endfor %}
     {% else %}
-        <li>
-            Test TODO
-        </li>
-        <li>
-            Test TODO
-        </li>
-        <li>
-            Test TODO
-        </li>
-        <li>
-            Test TODO
-        </li>
-        <li>
-            Test TODO
-        </li>
+        {% for tag in tags %}
+            <li>
+                {{ tag.name }}
+            </li>
+        {% endfor %}
     {% endif %}
 </ul>

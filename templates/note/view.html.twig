@@ -36,7 +36,7 @@
                 {% include 'components/note/text/likes-count.html.twig' with { likesCount: note.getUsersLike() | length(), isInCollection: true } %}
             {% endif %}
 
-            {% include 'components/note/tag/list.html.twig' with { isInCollection: true } %}
+            {% include 'components/note/tag/list.html.twig' with { tags: note.getTags(), isInCollection: true } %}
             {% include 'components/note/text/category.html.twig' with { category: note.getCategory(), isInCollection: true } %}
         </div>
 

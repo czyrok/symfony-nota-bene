@@ -40,17 +40,17 @@ class NoteController extends AbstractController
 
         $note = new Note();
 
-        $noteCreationForm = $this->createForm(NoteEditType::class, $note);
-        $noteCreationForm->handleRequest($request);
+        $noteEditForm = $this->createForm(NoteEditType::class, $note);
+        $noteEditForm->handleRequest($request);
 
-        if ($noteCreationForm->isSubmitted() && $noteCreationForm->isValid()) {
+        if ($noteEditForm->isSubmitted() && $noteEditForm->isValid()) {
             $noteService->addNoteToUser($note, $categoryId, $currentUser);
 
             return $this->redirectToRoute('app_profile');
         }
 
         return $this->render('note/edit-form.html.twig', [
-            'noteCreationForm' => $noteCreationForm
+            'noteEditForm' => $noteEditForm
         ]);
     }
 
@@ -122,10 +122,10 @@ class NoteController extends AbstractController
             throw new AccessDeniedHttpException("You can't edit a note of a different user");
         }
 
-        $noteCreationForm = $this->createForm(NoteEditType::class, $note);
-        $noteCreationForm->handleRequest($request);
+        $noteEditForm = $this->createForm(NoteEditType::class, $note);
+        $noteEditForm->handleRequest($request);
 
-        if ($noteCreationForm->isSubmitted() && $noteCreationForm->isValid()) {
+        if ($noteEditForm->isSubmitted() && $noteEditForm->isValid()) {
             $noteService->saveNote($note);
 
             return $this->redirectToRoute('app_note_one', [
@@ -134,7 +134,7 @@ class NoteController extends AbstractController
         }
 
         return $this->render('note/edit-form.html.twig', [
-            'noteCreationForm' => $noteCreationForm,
+            'noteEditForm' => $noteEditForm,
             'note' => $note
         ]);
     }

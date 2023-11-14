@@ -1,0 +1,17 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Tag adding page{% endblock %}
+
+{% block body %}
+    <h2 class="text-4xl text-center font-black">Tag adding page</h2>
+
+    {{ form_start(tagEditForm, {'attr': {'class': 'py-20 gap-10 flex flex-col items-center'} }) }}
+        <div class="gap-4 flex flex-col">
+            {% include 'components/form/text-control.html.twig' with { 'formItem': tagEditForm.name, 'formItemLabel': 'Name' } %}
+        </div>
+        
+        <div class="gap-4 flex items-center">
+            {% include 'components/form/submit.html.twig' with { 'formItem': tagEditForm.submit, 'formItemLabel': 'Add the tag' } %}
+        </div>
+    {{ form_end(tagEditForm) }}
+{% endblock %}

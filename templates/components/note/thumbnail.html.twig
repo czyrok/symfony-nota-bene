@@ -7,7 +7,7 @@
         {% include 'components/note/text/likes-count.html.twig' with { likesCount: note.getUsersLike() | length() } %}
     {% endif %}
 
-    {% include 'components/note/tag/list.html.twig' with { } %}
+    {% include 'components/note/tag/list.html.twig' with { tags: note.getTags() } %}
 
     <div class="opacity-0 group-hover:opacity-100 flex justify-end items-end transition-all">
         {% include 'components/link.html.twig' with { 'path': path('app_note_one', { noteId: note.getId() }), 'linkText': 'View' } %}

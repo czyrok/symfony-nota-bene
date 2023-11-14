@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
-use App\Service\CategoryService;
+use App\Entity\Tag;
+use App\Service\TagService;
+use App\Type\TagEditType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,25 +13,25 @@ use Symfony\Component\Routing\Annotation\Route;
 class TagController extends AbstractController
 {
     #[Route(path: '/tag/add', name: 'app_tag_add')]
-    public function addTag(Request $request, CategoryService $categoryService): Response
+    public function addTag(Request $request, TagService $tagService): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $currentUser = $this->getUser();
 
-        /* $category = new Category();
+        $tag = new Tag();
 
-        $categoryCreationForm = $this->createForm(CategoryCreationType::class, $category);
-        $categoryCreationForm->handleRequest($request);
+        $tagEditForm = $this->createForm(TagEditType::class, $tag);
+        $tagEditForm->handleRequest($request);
 
-        if ($categoryCreationForm->isSubmitted() && $categoryCreationForm->isValid()) {
-            $categoryService->addCategoryToUser($category, $currentUser);
+        if ($tagEditForm->isSubmitted() && $tagEditForm->isValid()) {
+            $tagService->saveTag($tag, $currentUser);
 
             return $this->redirectToRoute('app_profile');
         }
 
-        return $this->render('category/edit-form.html.twig', [
-            'categoryCreationForm' => $categoryCreationForm
-        ]); */
+        return $this->render('tag/add-form.html.twig', [
+            'tagEditForm' => $tagEditForm
+        ]);
     }
 }
