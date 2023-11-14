@@ -1,9 +1,9 @@
 {% if isInCollection is defined and isInCollection %}
     <p class="text-3xl font-medium truncate">
-        Title
+        {{ note.getTitle() }}
     </p>
 {% else %}
     <p class="text-2xl font-medium truncate">
-        Title
+        {{ note.getTitle() }}
     </p>
 {% endif %}

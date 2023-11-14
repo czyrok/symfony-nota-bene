@@ -1,0 +1,25 @@
+<ul class="px-3 md:px-14 py-10 gap-x-10 flex flex-row snap-x overflow-x-auto">
+    {% for category in categories %}
+        <li class="w-fit h-full p-2 shadow-lg shadow-emerald-700/50 bg-emerald-500 snap-start">
+            <h3 class="pb-4 text-2xl font-bold">
+                {{ category.getTitle() }}
+            </h3>
+
+            <ul class="w-[20em] gap-y-4 flex flex-col">
+                {% for note in category.getNotes() %}
+                    <li>
+                        {% include 'components/note/thumbnail.html.twig' with { note: note } %}
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <div class="flex justify-center">
+                {% include 'components/link.html.twig' with { path: path('app_note_add', { categoryId: category.id }), linkText: 'Add a note' } %}
+            </div>
+        </li>
+    {% endfor %}
+
+    <li>
+        {% include 'components/button.html.twig' with { actionPath: path('app_category_add'), buttonText: 'Add a category' } %}
+    </li>
+</ul>

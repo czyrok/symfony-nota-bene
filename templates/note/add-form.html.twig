@@ -1,0 +1,21 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Add a note{% endblock %}
+
+{% block body %}
+    <h2 class="text-4xl text-center font-black">Add a note</h2>
+
+    {{ form_start(noteCreationForm, {'attr': {'class': 'py-20 gap-10 flex flex-col items-center'} }) }}
+        <div class="gap-4 flex flex-col">
+            {% include 'components/form/form-text-control.html.twig' with { 'formItem': noteCreationForm.title, 'formItemLabel': 'Title' } %}
+        </div>
+
+        <div class="gap-4 flex flex-col">
+            {% include 'components/form/form-text-control.html.twig' with { 'formItem': noteCreationForm.content, 'formItemLabel': 'Content' } %}
+        </div>
+        
+        <div class="gap-4 flex items-center">
+            {% include 'components/form/form-submit.html.twig' with { 'formSubmitItem': noteCreationForm.submit } %}
+        </div>
+    {{ form_end(noteCreationForm) }}
+{% endblock %}

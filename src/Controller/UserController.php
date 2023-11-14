@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\User;
 use App\Type\RegisterType;
 use App\Service\UserService;
+use App\Type\CategoryCreationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,7 +43,7 @@ class UserController extends AbstractController
         }
 
         return $this->render('user/register.html.twig', [
-            'form' => $registerForm
+            'registerForm' => $registerForm
         ]);
     }
 
@@ -56,15 +58,15 @@ class UserController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $user = $this->getUser();
+        $currentUser = $this->getUser();
 
         return $this->render('user/profile.html.twig', [
-            'user' => $user
+            'user' => $currentUser
         ]);
     }
 
     #[Route(path: '/profile/{userId}', name: 'app_profile_one')]
-    public function specificProfile(int $userId, UserService $userService): Response
+    public function specificProfile(int $userId): Response
     {
         $user = null;
 

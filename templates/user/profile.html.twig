@@ -6,66 +6,6 @@
     <div class="h-full grid grid-rows-[auto_1fr]">
         <h2 class="text-4xl text-center font-black">Profile ({{ user.username }})</h2>
 
-        <ul class="px-3 md:px-14 py-10 gap-x-10 flex flex-row snap-x overflow-x-auto">
-            <li class="w-fit h-full p-2 shadow-lg shadow-emerald-700/50 bg-emerald-500 snap-start">
-                <h3 class="pb-4 text-2xl font-bold">
-                    Titre Category
-                </h3>
-
-                <ul class="gap-y-4 flex flex-col">
-                    <li>
-                        {% include 'components/note/thumbnail.html.twig' with { } %}
-                    </li>
-
-                    <li>
-                        {% include 'components/note/thumbnail.html.twig' with { } %}
-                    </li>
-
-                    <li>
-                        {% include 'components/note/thumbnail.html.twig' with { } %}
-                    </li>
-
-                    <li>
-                        {% include 'components/note/thumbnail.html.twig' with { } %}
-                    </li>
-                </ul>
-            </li>
-
-            <li class="w-fit h-full p-2 shadow-lg shadow-emerald-700/50 bg-emerald-500 snap-start">
-                <h3 class="pb-4 text-2xl font-bold">
-                    Titre Category
-                </h3>
-
-                <ul class="gap-y-4 flex flex-col">
-                    <li>
-                        {% include 'components/note/thumbnail.html.twig' with { } %}
-                    </li>
-
-                    <li>
-                        {% include 'components/note/thumbnail.html.twig' with { } %}
-                    </li>
-                </ul>
-            </li>
-
-            <li class="w-fit h-full p-2 shadow-lg shadow-emerald-700/50 bg-emerald-500 snap-start">
-                <h3 class="pb-4 text-2xl font-bold">
-                    Titre Category
-                </h3>
-
-                <ul class="gap-y-4 flex flex-col">
-                    <li>
-                        {% include 'components/note/thumbnail.html.twig' with { } %}
-                    </li>
-
-                    <li>
-                        {% include 'components/note/thumbnail.html.twig' with { } %}
-                    </li>
-                </ul>
-            </li>
-
-            <div>
-                {% include 'components/button.html.twig' with { actionPath: path('app_profile'), buttonText: 'Add a category' } %}
-            </div>
-        </ul>
+        {% include 'components/category/list.html.twig' with { categories: user.getCategories() } %}
     </div>
 {% endblock %}
