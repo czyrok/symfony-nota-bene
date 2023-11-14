@@ -6,6 +6,7 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -20,6 +21,11 @@ class Category
     private ?User $user = null;
 
     #[ORM\Column(length: 40)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        max: 40,
+        maxMessage: 'The title cannot be longer than {{ limit }} characters',
+    )]
     private ?string $title = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Note::class, orphanRemoval: true)]

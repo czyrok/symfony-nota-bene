@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Service\CategoryService;
-use App\Type\CategoryCreationType;
+use App\Type\CategoryEditType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +23,7 @@ class CategoryController extends AbstractController
 
         $category = new Category();
 
-        $categoryCreationForm = $this->createForm(CategoryCreationType::class, $category);
+        $categoryCreationForm = $this->createForm(CategoryEditType::class, $category);
         $categoryCreationForm->handleRequest($request);
 
         if ($categoryCreationForm->isSubmitted() && $categoryCreationForm->isValid()) {
@@ -54,7 +54,7 @@ class CategoryController extends AbstractController
             throw new AccessDeniedHttpException("You can't edit a category of a different user");
         }
 
-        $categoryCreationForm = $this->createForm(CategoryCreationType::class, $category);
+        $categoryCreationForm = $this->createForm(CategoryEditType::class, $category);
         $categoryCreationForm->handleRequest($request);
 
         if ($categoryCreationForm->isSubmitted() && $categoryCreationForm->isValid()) {

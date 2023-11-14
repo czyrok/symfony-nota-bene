@@ -4,8 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Note;
 use App\Service\NoteService;
-use App\Type\ConfirmationType;
-use App\Type\NoteCreationType;
+use App\Type\NoteEditType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,7 +40,7 @@ class NoteController extends AbstractController
 
         $note = new Note();
 
-        $noteCreationForm = $this->createForm(NoteCreationType::class, $note);
+        $noteCreationForm = $this->createForm(NoteEditType::class, $note);
         $noteCreationForm->handleRequest($request);
 
         if ($noteCreationForm->isSubmitted() && $noteCreationForm->isValid()) {
@@ -123,7 +122,7 @@ class NoteController extends AbstractController
             throw new AccessDeniedHttpException("You can't edit a note of a different user");
         }
 
-        $noteCreationForm = $this->createForm(NoteCreationType::class, $note);
+        $noteCreationForm = $this->createForm(NoteEditType::class, $note);
         $noteCreationForm->handleRequest($request);
 
         if ($noteCreationForm->isSubmitted() && $noteCreationForm->isValid()) {
