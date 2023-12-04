@@ -26,9 +26,16 @@
             {% include 'components/form/textarea-control.html.twig' with { 'formItem': noteEditForm.content, 'formItemLabel': 'Content' } %}
         </div>
 
-        <div class="gap-4 flex flex-col">
+        <div class="gap-4 flex flex-col items-center">
             {% include 'components/form/choices-control.html.twig' with { 'formItem': noteEditForm.tags, 'formItemLabel': 'Tags' } %}
+            
+            {% if note is defined %}
+                {% include 'components/button.html.twig' with { 'actionPath': path('app_tag_add', { noteId: note.id }), 'buttonText': 'Add a tag' } %}
+            {% else %}
+                {% include 'components/button.html.twig' with { 'actionPath': path('app_tag_add', { categoryId: categoryId }), 'buttonText': 'Add a tag' } %}
+            {% endif %}
         </div>
+
 
         <div class="gap-4 flex flex-col">
             {% include 'components/form/checkbox-control.html.twig' with { 'formItem': noteEditForm.isPublic, 'formItemLabel': 'Set public' } %}

@@ -50,7 +50,8 @@ class NoteController extends AbstractController
         }
 
         return $this->render('note/edit-form.html.twig', [
-            'noteEditForm' => $noteEditForm
+            'noteEditForm' => $noteEditForm,
+            'categoryId' => $categoryId
         ]);
     }
 
