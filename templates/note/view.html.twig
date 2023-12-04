@@ -9,10 +9,10 @@
 
     <div class="px-3 md:px-14 py-20 gap-6 flex flex-col">
         <div>
-            <div class="gap-4 flex items-center">
+            <div class="gap-4 grid grid-cols-[auto_1fr] items-center">
                 {% include 'components/note/text/title.html.twig' with { note: note, isInCollection: true } %}
                 
-                <div class="gap-2 flex">
+                <div class="gap-2 flex flex-wrap">
                     {% if note.isPublic() and currentUserHasLikedNote is defined and currentUserHasLikedNote %}
                         {% include 'components/button.html.twig' with { 'actionPath': path('app_note_one_like', { noteId: note.getId() }), 'buttonText': 'Unlike' } %}
                     {% elseif note.isPublic() and currentUserHasLikedNote is defined and not currentUserHasLikedNote %}

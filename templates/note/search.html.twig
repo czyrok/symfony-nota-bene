@@ -26,6 +26,8 @@
         
         <div class="gap-4 flex items-center">
             {% include 'components/form/submit.html.twig' with { 'formItem': noteSearchForm.submit, 'formItemLabel': 'Search' } %}
+
+            {% include 'components/button.html.twig' with { 'actionPath': path('app_search'), 'buttonText': 'Reset' } %}
         </div>
         
         {{ form_widget(noteSearchForm._token) }}
