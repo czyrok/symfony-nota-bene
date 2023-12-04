@@ -1,4 +1,4 @@
-{% set isCurrentUserCategories = app.user.getId() is same as(user.getId()) %}
+{% set isCurrentUserCategories = app.user is not null ? app.user.getId() is same as(user.getId()) : false %}
 
 <ul class="px-3 md:px-14 py-10 gap-x-10 flex flex-row snap-x overflow-x-auto">
     {% for category in user.getCategories() %}

@@ -2,7 +2,7 @@
 
 {% block title %}Note{% endblock %}
 
-{% set isCurrentUserNote = app.user.getId() is same as(note.getAuthor().getId()) %}
+{% set isCurrentUserNote = app.user is not null ? app.user.getId() is same as(note.getAuthor().getId()) : false %}
 
 {% block body %}
     <h2 class="text-4xl text-center font-black">Note</h2>
