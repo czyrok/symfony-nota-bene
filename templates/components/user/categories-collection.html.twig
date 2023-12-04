@@ -1,11 +1,11 @@
 {% set isCurrentUserCategories = app.user is not null ? app.user.getId() is same as(user.getId()) : false %}
 
-<ul class="px-3 md:px-14 py-10 gap-x-10 flex flex-row snap-x overflow-x-auto">
+<ul class="px-3 md:px-14 py-10 gap-x-10 flex flex-row overflow-x-auto">
     {% for category in user.getCategories() %}
         {% set categoryNotes = isCurrentUserCategories ? category.getNotes() : category.getPublicNotes() %}
 
         {% if isCurrentUserCategories or categoryNotes | length() > 0 %}
-            <li class="w-fit h-full p-2 shadow-lg shadow-emerald-700/50 bg-emerald-500 snap-start">
+            <li class="w-fit h-full p-2 shadow-lg shadow-emerald-700/50 bg-emerald-500">
                 <h3 class="mb-4 text-2xl font-bold">
                     {{ category.getTitle() }}
                 </h3>
