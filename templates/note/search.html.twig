@@ -5,7 +5,7 @@
 {% block body %}
     <h2 class="text-4xl text-center font-black">Search</h2>
 
-    {{ form_start(noteSearchForm, {'attr': {'class': 'py-20 gap-10 flex flex-col items-center'} }) }}
+    {{ form_start(noteSearchForm, {'attr': {'class': 'pt-20 gap-10 flex flex-col items-center'} }) }}
         <div class="gap-4 flex flex-col">
             {% include 'components/form/text-control.html.twig' with { 'formItem': noteSearchForm.title, 'formItemLabel': 'Note title' } %}
         </div>
@@ -15,7 +15,7 @@
         </div>
 
         <div class="gap-4 flex flex-col items-center">
-            {% include 'components/form/choices-control.html.twig' with { 'formItem': noteSearchForm.tags, 'formItemLabel': 'Note tags' } %}
+            {% include 'components/form/choices-control.html.twig' with { 'formItem': noteSearchForm.tags, 'formItemLabel': 'Note tags', 'formItemPlaceholder': 'No tag' } %}
         </div>
 
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -31,5 +31,5 @@
         {{ form_widget(noteSearchForm._token) }}
     {{ form_end(noteSearchForm, { render_rest: false }) }}
 
-    {% include 'components/note/collection.html.twig' with { } %}
+    {% include 'components/note/collection.html.twig' with { notes: notes } %}
 {% endblock %}

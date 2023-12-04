@@ -27,7 +27,7 @@
         </div>
 
         <div class="gap-4 flex flex-col items-center">
-            {% include 'components/form/choices-control.html.twig' with { 'formItem': noteEditForm.tags, 'formItemLabel': 'Tags' } %}
+            {% include 'components/form/choices-control.html.twig' with { 'formItem': noteEditForm.tags, 'formItemLabel': 'Tags', 'formItemPlaceholder': 'No tag' } %}
             
             {% if note is defined %}
                 {% include 'components/button.html.twig' with { 'actionPath': path('app_tag_add', { noteId: note.id }), 'buttonText': 'Add a tag' } %}

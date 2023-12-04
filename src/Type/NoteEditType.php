@@ -25,6 +25,7 @@ class NoteEditType extends AbstractType
                 'class' => Tag::class,
                 'choice_label' => 'name',
                 'multiple' => true,
+                'required' => false
             ])
             ->add('isPublic', CheckboxType::class, [
                 'required' => false

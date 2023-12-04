@@ -44,6 +44,7 @@ class CategoryService
             throw new AccessDeniedHttpException("You can't delete a category of a different user");
         }
 
-        $this->saveCategory($category);
+        $this->entityManager->remove($category);
+        $this->entityManager->flush();
     }
 }

@@ -2,4 +2,8 @@
     {% for note in notes %}
         {% include 'components/note/thumbnail.html.twig' with { note: note } %}
     {% endfor %}
+
+    {% if notes|length == 0  %}
+        {% include 'components/message/inform.html.twig' with { message: 'No notes found' } %}
+    {% endif %}
 </div>

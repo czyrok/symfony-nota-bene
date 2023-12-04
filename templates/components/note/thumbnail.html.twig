@@ -1,6 +1,6 @@
 {% set gridRowsTemplate = note.isPublic() ? 'auto_auto_auto_1fr' : 'auto_auto_1fr' %}
 
-<div class="w-[20em] h-[9em] px-6 py-2 grid grid-rows-{{ gridRowsTemplate }} rounded-2xl hover:scale-[1.10] hover:shadow-lg hover:shadow-emerald-700/50 bg-emerald-200 transition-all group">
+<div class="w-[20em] h-[9em] px-6 py-2 grid grid-rows-[{{ gridRowsTemplate }}] rounded-2xl hover:scale-[1.10] hover:shadow-lg hover:shadow-emerald-700/50 bg-emerald-200 transition-all group">
     {% include 'components/note/text/title.html.twig' with { note: note } %}
 
     {% if note.isPublic() %}
