@@ -2,12 +2,8 @@
     {% if formItemLabel is defined %}
         {{ form_label(formItem, formItemLabel, {'label_attr': {'class': 'text-xl block font-light'} }) }}
     {% endif %}
-
-    {% if formItemValue is defined %}
-        {{ form_widget(formItem, {'value': formItemValue, 'attr': {'class': 'w-[13em] px-1 text-2xl rounded-xl bg-teal-200 outline-2 focus:outline outline-teal-300'} }) }}
-    {% else %}
-        {{ form_widget(formItem) }}
-    {% endif %}
+    
+    {{ form_widget(formItem, {'attr': {'class': '[&>*:checked]:shadow-[0_0_10px_100px_#000000_inset] [&>*:checked]:rounded-lg [&>*:checked]:shadow-teal-400 w-[13em] p-1 text-2xl rounded-xl bg-teal-200 outline-2 focus:outline outline-teal-300'}, 'choice_attr': {'class': 'checked:bg-red-800'} }) }}
 
     <small>{{ form_help(formItem) }}</small>
 
