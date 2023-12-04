@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Note;
 use App\Service\NoteService;
 use App\Type\NoteEditType;
+use App\Type\NoteSearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,9 +27,25 @@ class NoteController extends AbstractController
     }
 
     #[Route('/search', name: 'app_search')]
-    public function search(): Response
+    public function search(Request $request, NoteService $noteService): Response
     {
-        return $this->render('note/search.html.twig');
+        $noteSearchForm = $this->createForm(NoteSearchType::class);
+        $noteSearchForm->handleRequest($request);
+        
+        if ($noteSearchForm->isSubmitted() && $noteSearchForm->isValid()) {
+            $noteSearhFormResult = $noteSearchForm->getData();
+            
+            $currentUser = $this->getUser();
+            
+            $notes = $noteService->getFilteredNotes($noteSearhFormResult['authorUsername'], $noteSearhFormResult['title'], $noteSearhFormResult['tags'], $noteSearhFormResult['onlyLikedByCurrentUser'], $currentUser);
+        } else {
+            $notes = $noteService->getAllNotes(true);
+        }
+
+        return $this->render('note/search.html.twig',[
+            'noteSearchForm' => $noteSearchForm,
+            'notes' => $notes
+        ]);
     }
 
     #[Route(path: '/note/add', name: 'app_note_add')]

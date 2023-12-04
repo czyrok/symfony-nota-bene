@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Note;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -25,6 +27,41 @@ class NoteRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('n')
             ->andWhere('n.isPublic = true')
             ->getQuery()
+            ->getResult();
+    }
+
+    public function getFilteredPublicNotes(?string $authorUsername, ?string $title, ArrayCollection $tags, ?bool $onlyLikedByCurrentUser, ?User $currentUser): array {
+        $query = $this->createQueryBuilder('n')
+            ->andWhere('n.isPublic = true');
+
+        if ($authorUsername !== null) {
+            $query = $query
+                ->innerJoin('n.author', 'a')
+                ->andWhere('a.username LIKE :authorUsername')
+                ->setParameter('authorUsername', '%' . $authorUsername . '%');
+        }
+
+        if ($title !== null) {
+            $query = $query
+                ->andWhere('n.title LIKE :title')
+                ->setParameter('title', '%' . $title . '%');
+        }
+
+        if ($tags->count() > 0) {
+            $query = $query
+                ->innerJoin('n.tags', 't')
+                ->andWhere('t IN (:tags)')
+                ->setParameter('tags', $tags);
+        }
+
+        if ($onlyLikedByCurrentUser === true && $currentUser !== null) {
+            $query = $query
+                ->innerJoin('n.usersLike', 'ul')
+                ->andWhere('ul.id = :currentUserId')
+                ->setParameter('currentUserId', $currentUser->getId());
+        }
+        
+        return $query->getQuery()
             ->getResult();
     }
 }

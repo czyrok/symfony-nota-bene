@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Note;
 use App\Entity\User;
 use App\Repository\NoteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -24,6 +25,10 @@ class NoteService
         }
 
         return $this->noteRepository->findAll();
+    }
+
+    public function getFilteredNotes(?string $authorUsername, ?string $title, ArrayCollection $tags, ?bool $onlyLikedByCurrentUser, ?User $currentUser): array {
+        return $this->noteRepository->getFilteredPublicNotes($authorUsername, $title, $tags, $onlyLikedByCurrentUser, $currentUser);
     }
 
     public function getNote(int $noteId): ?Note {
