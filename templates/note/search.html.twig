@@ -7,7 +7,7 @@
 
     {{ form_start(noteSearchForm, {'attr': {'class': 'pt-20 gap-10 flex flex-col items-center'} }) }}
         <div class="gap-4 flex flex-col">
-            {% include 'components/form/text-control.html.twig' with { 'formItem': noteSearchForm.title, 'formItemLabel': 'Note title' } %}
+            {% include 'components/form/text-control.html.twig' with { 'formItem': noteSearchForm.title, 'formItemLabel': 'Title' } %}
         </div>
 
         <div class="gap-4 flex flex-col">
@@ -15,7 +15,7 @@
         </div>
 
         <div class="gap-4 flex flex-col items-center">
-            {% include 'components/form/choices-control.html.twig' with { 'formItem': noteSearchForm.tags, 'formItemLabel': 'Note tags', 'formItemPlaceholder': 'No tag' } %}
+            {% include 'components/form/choices-control.html.twig' with { 'formItem': noteSearchForm.tags, 'formItemLabel': 'Tags', 'formItemPlaceholder': 'No tag' } %}
         </div>
 
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -25,9 +25,8 @@
         {% endif %}
         
         <div class="gap-4 flex items-center">
-            {% include 'components/form/submit.html.twig' with { 'formItem': noteSearchForm.submit, 'formItemLabel': 'Search' } %}
-
             {% include 'components/button.html.twig' with { 'actionPath': path('app_search'), 'buttonText': 'Reset' } %}
+            {% include 'components/form/submit.html.twig' with { 'formItem': noteSearchForm.submit, 'formItemLabel': 'Search' } %}
         </div>
         
         {{ form_widget(noteSearchForm._token) }}

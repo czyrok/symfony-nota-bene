@@ -26,13 +26,21 @@ class NoteRepository extends ServiceEntityRepository
     public function getPublicNotes(): array {
         return $this->createQueryBuilder('n')
             ->andWhere('n.isPublic = true')
+            ->leftJoin('n.usersLike', 'ul')
+            ->addSelect('COUNT(ul.id) AS HIDDEN likesCount')
+            ->groupby('n.id')
+            ->orderBy('likesCount', 'DESC')
             ->getQuery()
             ->getResult();
     }
 
     public function getFilteredPublicNotes(?string $authorUsername, ?string $title, ArrayCollection $tags, ?bool $onlyLikedByCurrentUser, ?User $currentUser): array {
         $query = $this->createQueryBuilder('n')
-            ->andWhere('n.isPublic = true');
+            ->andWhere('n.isPublic = true')
+            ->leftJoin('n.usersLike', 'ul')
+            ->addSelect('COUNT(ul.id) AS HIDDEN likesCount')
+            ->groupby('n.id')
+            ->orderBy('likesCount', 'DESC');
 
         if ($authorUsername !== null) {
             $query = $query
@@ -56,7 +64,6 @@ class NoteRepository extends ServiceEntityRepository
 
         if ($onlyLikedByCurrentUser === true && $currentUser !== null) {
             $query = $query
-                ->innerJoin('n.usersLike', 'ul')
                 ->andWhere('ul.id = :currentUserId')
                 ->setParameter('currentUserId', $currentUser->getId());
         }

@@ -26,7 +26,9 @@ class NoteSearchType extends AbstractType
                 'query_builder' => fn(EntityRepository $repository)
                     => $repository->createqueryBuilder('t')->orderBy('t.name', 'ASC'),
                 'class' => Tag::class,
-                'choice_label' => 'name',
+                'choice_label' => function (Tag $tag): string {
+                    return '#' . $tag->getName();
+                },
                 'multiple' => true,
                 'required' => false
             ])

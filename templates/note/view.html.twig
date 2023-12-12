@@ -9,8 +9,10 @@
 
     <div class="px-3 md:px-14 py-20 gap-6 flex flex-col">
         <div>
+            {% include 'components/note/text/category.html.twig' with { category: note.getCategory() } %}
+
             <div class="gap-4 grid grid-cols-[auto_1fr] items-center">
-                {% include 'components/note/text/title.html.twig' with { note: note, isInCollection: true } %}
+                {% include 'components/note/text/title.html.twig' with { note: note, useSqueezeEffect: true } %}
                 
                 <div class="gap-2 flex flex-wrap">
                     {% if note.isPublic() and currentUserHasLikedNote is defined and currentUserHasLikedNote %}
@@ -26,18 +28,16 @@
                             {% include 'components/button.html.twig' with { 'actionPath': path('app_note_one_public', { noteId: note.getId() }), 'buttonText': 'Set public' } %}
                         {% endif %}
 
-                        {% include 'components/button.html.twig' with { 'actionPath': path('app_profile'), 'buttonText': 'Share' } %}
                         {% include 'components/button.html.twig' with { 'actionPath': path('app_note_one_delete_confirmation', { noteId: note.getId() }), 'buttonText': 'Delete' } %}
                     {% endif %}
                 </div>
             </div>
 
             {% if note.isPublic() %}
-                {% include 'components/note/text/likes-count.html.twig' with { likesCount: note.getUsersLike() | length(), isInCollection: true } %}
+                {% include 'components/note/text/likes-count.html.twig' with { likesCount: note.getUsersLike() | length(), useSqueezeEffect: true } %}
             {% endif %}
 
-            {% include 'components/note/tag/list.html.twig' with { tags: note.getTags(), isInCollection: true } %}
-            {% include 'components/note/text/category.html.twig' with { category: note.getCategory(), isInCollection: true } %}
+            {% include 'components/note/tag/list.html.twig' with { tags: note.getTags(), useSqueezeEffect: true } %}
         </div>
 
         <div class="gap-4 flex items-center">

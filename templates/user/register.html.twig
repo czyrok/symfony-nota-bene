@@ -12,9 +12,8 @@
         </div>
         
         <div class="gap-4 flex items-center">
-            {% include 'components/form/submit.html.twig' with { 'formItem': registerForm.submit } %}
-
             {% include 'components/link.html.twig' with { 'path': path('app_login'), 'linkText': 'Log in' } %}
+            {% include 'components/form/submit.html.twig' with { 'formItem': registerForm.submit } %}
         </div>
     {{ form_end(registerForm) }}
 {% endblock %}

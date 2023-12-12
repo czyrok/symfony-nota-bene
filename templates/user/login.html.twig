@@ -22,11 +22,11 @@
 
         <div class="gap-4 flex flex-col items-center">
             <div class="gap-4 flex items-center">
+                {% include 'components/link.html.twig' with { 'path': path('app_register'), 'linkText': 'Sign up' } %}
+                
                 <button class="px-5 text-2xl rounded-md text-white bg-teal-900 hover:bg-teal-400 outline-4 focus:outline outline-teal-300 transition-colors" type="submit">
                     Submit
                 </button>
-
-                {% include 'components/link.html.twig' with { 'path': path('app_register'), 'linkText': 'Sign up' } %}
             </div>
 
             {% if error %}

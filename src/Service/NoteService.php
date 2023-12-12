@@ -9,13 +9,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class NoteService
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
-        private readonly UserPasswordHasherInterface $userPasswordHasher,
         private readonly NoteRepository $noteRepository
     ) {}
 

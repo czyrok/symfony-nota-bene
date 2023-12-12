@@ -8,6 +8,9 @@
     <div class="px-3 md:px-14 py-20 gap-10 flex flex-col items-center">
         {% include 'components/message/inform.html.twig' with { message: 'Are you sure, you want to delete the note "' ~ note.getTitle() ~ '" ?' } %}
 
-        {% include 'components/button.html.twig' with { actionPath: path('app_note_one_delete', { noteId: note.getId() }), buttonText: 'Delete the note', highlight: true } %}
+        <div class="gap-4 flex items-center">
+            {% include 'components/button.html.twig' with { actionPath: path('app_profile'), buttonText: 'Cancel' } %}
+            {% include 'components/button.html.twig' with { actionPath: path('app_note_one_delete', { noteId: note.getId() }), buttonText: 'Delete the note', highlight: true } %}
+        </div>
     </div>
 {% endblock %}
